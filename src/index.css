@@ -1,0 +1,40 @@
+.schweinchen-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin: 40px 15px 0 15px;
+}
+.schweinchen-card {
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 6px;
+  position: relative;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  max-width: 900px;
+  margin: 50px auto;
+  border-radius: 6px;
+}
+
+form input,
+form textarea {
+  display: block;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 10px 0 20px 0;
+}
+form button {
+  background: var(--primary);
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: "Poppins";
+  cursor: pointer;
+}
