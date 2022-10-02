@@ -8,6 +8,7 @@ const Update = () => {
 
   const [name, setName] = useState("");
   const [interests, setInterests] = useState("");
+  const [address, setAddress] = useState("");
   const [formError, setFormError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -17,7 +18,7 @@ const Update = () => {
       return;
     }
 
-    const { data, error } = await supabase.from("schweinchen").update({ name, interests }).eq("id", id);
+    const { data, error } = await supabase.from("profiles").update({ name, interests, address }).eq("id", id).select();
 
     if (error) {
       setFormError("Da hast du wohl was vergessen!");
@@ -31,7 +32,7 @@ const Update = () => {
 
   useEffect(() => {
     const fetchSchweinchen = async () => {
-      const { data, error } = await supabase.from("schweinchen").select().eq("id", id).single();
+      const { data, error } = await supabase.from("profiles").select().eq("id", id).single();
 
       if (error) {
         navigate("/schweinchen", { replace: true });
@@ -39,6 +40,7 @@ const Update = () => {
       if (data) {
         setName(data.name);
         setInterests(data.interests);
+        setAddress(data.address);
       }
     };
 
@@ -53,6 +55,9 @@ const Update = () => {
 
         <label htmlFor="interests">Interessen:</label>
         <textarea id="interests" value={interests} onChange={(e) => setInterests(e.target.value)} />
+
+        <label htmlFor="address">Adresse:</label>
+        <textarea id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
 
         <button>Update Schweinchen</button>
         {formError && <p className="error">{formError}</p>}

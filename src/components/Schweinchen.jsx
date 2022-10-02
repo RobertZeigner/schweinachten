@@ -8,7 +8,7 @@ const Schweinchen = () => {
 
   useEffect(() => {
     const fetchSchweinchen = async () => {
-      const { data, error } = await supabase.from("schweinchen").select();
+      const { data, error } = await supabase.from("profiles").select();
 
       if (error) {
         setFetchError("Keine Schweinchen gefunden");

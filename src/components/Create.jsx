@@ -17,7 +17,7 @@ const Create = () => {
       return;
     }
 
-    const { data, error } = await supabase.from("schweinchen").insert([{ name, interests }]);
+    const { data, error } = await supabase.from("schweinchen").insert([{ name, interests }]).select();
 
     if (error) {
       console.log(error);
@@ -31,7 +31,7 @@ const Create = () => {
   };
 
   return (
-    <div className="page create">
+    <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />

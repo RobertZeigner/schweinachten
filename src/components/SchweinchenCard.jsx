@@ -5,15 +5,9 @@ const SchweinchenCard = ({ schwein }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" sx={{ fontFamily: "Poppins" }}>
+        <Typography variant="h5" sx={{ fontFamily: "Poppins", textAlign: "center" }}>
           {schwein.name}
         </Typography>
-        <Typography paragraph sx={{ fontFamily: "Poppins", fontSize: 20 }}>
-          {schwein.interests}
-        </Typography>
-        <Link to={"/" + schwein.id}>
-          <i className="material-icons">edit</i>
-        </Link>
       </CardContent>
     </Card>
   );

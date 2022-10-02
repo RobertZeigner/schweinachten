@@ -19,7 +19,7 @@ const Nav = () => {
           <Link to="/schweinchen">Alle Schweinchen</Link>
         </Typography>
         <Typography variant="h5" sx={{ fontFamily: "Poppins" }}>
-          <Link to="/mitmachen">Mitmachen</Link>
+          <Link to="/account">Profil</Link>
         </Typography>
       </Stack>
     </Box>
