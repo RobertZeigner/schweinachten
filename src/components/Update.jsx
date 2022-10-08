@@ -26,7 +26,7 @@ const Update = () => {
 
     if (data) {
       setFormError(null);
-      navigate("/schweinchen");
+      navigate("/account");
     }
   };
 
@@ -35,7 +35,7 @@ const Update = () => {
       const { data, error } = await supabase.from("profiles").select().eq("id", id).single();
 
       if (error) {
-        navigate("/schweinchen", { replace: true });
+        navigate("/account", { replace: true });
       }
       if (data) {
         setName(data.name);
@@ -45,7 +45,7 @@ const Update = () => {
     };
 
     fetchSchweinchen();
-  }, [id, navigate]);
+  }, []);
 
   return (
     <div className="page create">

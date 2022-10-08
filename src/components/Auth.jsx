@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../config/supabaseClient";
+import { Stack, Box, Button, Typography, TextField } from "@mui/material";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -28,12 +29,35 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <input value={email} type="text" onChange={(e) => setEmail(e.target.value)} />
-      <input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={() => handleLogin(email, password, navigate)}>Login</button>
-      <button onClick={() => handleSignUp(email, password, navigate)}>SignIn</button>
-    </div>
+    <Box sx={{ width: 500, height: "auto", backgroundColor: "white", borderRadius: 2 }} p="20px" m="50px auto">
+      <Stack pb="10px" gap="15px">
+        <TextField
+          size="small"
+          value={email}
+          label="E-Mail"
+          type="text"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <TextField
+          size="small"
+          value={password}
+          label="Passwort"
+          type="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Stack>
+      <Stack direction="row" gap="10px">
+        <Button variant="outlined" size="small" onClick={() => handleLogin(email, password, navigate)}>
+          Login
+        </Button>
+        <Button variant="contained" size="small" onClick={() => handleSignUp(email, password, navigate)}>
+          SignIn
+        </Button>
+      </Stack>
+    </Box>
   );
 };
 

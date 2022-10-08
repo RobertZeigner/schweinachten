@@ -33,6 +33,8 @@ const Account = ({ session }) => {
         .eq("id", user.id)
         .single();
 
+      console.log(session);
+
       if (error && status !== 406) {
         throw error;
       }
@@ -49,7 +51,7 @@ const Account = ({ session }) => {
     }
   };
 
-  const updateProfile = async (e) => {
+  /*   const updateProfile = async (e) => {
     e.preventDefault();
 
     try {
@@ -76,39 +78,11 @@ const Account = ({ session }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }; */
 
   return (
     <div aria-live="polite">
-      {loading ? (
-        "Saving ..."
-      ) : (
-        <form onSubmit={updateProfile} className="form-widget">
-          <div>Email: {session.user.email}</div>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input id="name" type="text" value={name || ""} onChange={(e) => setName(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor="interests">Interessen</label>
-            <input id="interests" type="text" value={interests || ""} onChange={(e) => setInterests(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor="address">Adresse</label>
-            <input id="address" type="text" value={address || ""} onChange={(e) => setAddress(e.target.value)} />
-          </div>
-          <Stack direction="row" display="flex" justifyContent="space-around">
-            <button className="button primary block" disabled={loading}>
-              Update profile
-            </button>
-            <button type="button" className="button block" onClick={() => supabase.auth.signOut()}>
-              Sign Out
-            </button>
-          </Stack>
-        </form>
-      )}
-
-      <Profilecard key={session.user.id} schweinchen={schweinchen} />
+      <Profilecard id={session.user.id} schweinchen={schweinchen} />
     </div>
   );
 };
