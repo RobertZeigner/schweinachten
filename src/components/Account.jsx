@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import supabase from "../config/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import Profilecard from "./Profilecard";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 const Account = ({ session }) => {
   const navigate = useNavigate();
@@ -11,16 +11,40 @@ const Account = ({ session }) => {
   const [name, setName] = useState(null);
   const [interests, setInterests] = useState(null);
   const [address, setAddress] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
+  const [schweinchen, setSchweinchen] = useState(null);
 
-  let schweinchen = {
+  /*   let schweinchen = {
     name,
     interests,
     address,
-  };
+  }; */
+
+  /* console.log(session); */
 
   useEffect(() => {
     getProfile();
   }, [session]);
+
+  useEffect(() => {
+    const fetchSchweinchen = async () => {
+      const { data, error } = await supabase.from("profiles").select();
+
+      if (error) {
+        setFetchError("Keine Schweinchen gefunden");
+        setSchweinchen(null);
+        console.log(error);
+      }
+
+      if (data) {
+        console.log(data);
+        setSchweinchen(data);
+        setFetchError(null);
+      }
+    };
+    fetchSchweinchen();
+  }, []);
 
   const getProfile = async () => {
     try {
@@ -32,8 +56,6 @@ const Account = ({ session }) => {
         .select(`name, interests, address`)
         .eq("id", user.id)
         .single();
-
-      console.log(session);
 
       if (error && status !== 406) {
         throw error;
@@ -51,7 +73,7 @@ const Account = ({ session }) => {
     }
   };
 
-  /*   const updateProfile = async (e) => {
+  const updateProfile = async (e) => {
     e.preventDefault();
 
     try {
@@ -66,9 +88,15 @@ const Account = ({ session }) => {
         updated_at: new Date(),
       };
 
+      if (!name || !interests || !address) {
+        setErrorMessage("Bitte alle Felder ausfüllen");
+      } else {
+        setErrorMessage(null);
+      }
+
       let { error } = await supabase.from("profiles").upsert(updates);
 
-      navigate("/schweinchen");
+      navigate("/account");
 
       if (error) {
         throw error;
@@ -78,11 +106,40 @@ const Account = ({ session }) => {
     } finally {
       setLoading(false);
     }
-  }; */
+  };
 
   return (
-    <div aria-live="polite">
-      <Profilecard id={session.user.id} schweinchen={schweinchen} />
+    <div aria-live='polite'>
+      {loading ? (
+        "Loading ..."
+      ) : (
+        <form onSubmit={updateProfile} className='form-widget'>
+          <div>Email: {session.user.email}</div>
+          <div>
+            <label htmlFor='name'>Name</label>
+            <input id='name' type='text' value={name || ""} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor='interests'>Interessen</label>
+            <input id='interests' type='text' value={interests || ""} onChange={(e) => setInterests(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor='address'>Adresse</label>
+            <input id='address' type='text' value={address || ""} onChange={(e) => setAddress(e.target.value)} />
+          </div>
+          <Stack direction='row' gap='15px'>
+            <button className='button primary block' disabled={loading}>
+              Profil aktualisieren
+            </button>
+            <button type='button' className='button block' onClick={() => supabase.auth.signOut()}>
+              Ausloggen
+            </button>
+            <Typography color='error' mt='5px'>
+              {errorMessage}
+            </Typography>
+          </Stack>
+        </form>
+      )}
     </div>
   );
 };

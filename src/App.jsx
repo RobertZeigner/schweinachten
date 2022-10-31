@@ -29,11 +29,11 @@ function App() {
         <>
           <Nav />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/mitmachen" element={<Create />} />
-            <Route path="/schweinchen" element={<Schweinchen />} />
-            <Route path="/:id" element={<Update />} />
-            <Route path="/account" element={<Account session={session} />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/mitmachen' element={<Create />} />
+            <Route path='/schweinchen' element={<Schweinchen />} />
+            <Route path='/:id' element={<Update />} />
+            <Route path='/account' element={<Account session={session} />} />
           </Routes>
         </>
       )}
