@@ -48,19 +48,19 @@ const Update = () => {
   }, []);
 
   return (
-    <div className="page create">
+    <div className='page create'>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+        <label htmlFor='name'>Name:</label>
+        <input type='text' id='name' value={name} onChange={(e) => setName(e.target.value)} />
 
-        <label htmlFor="interests">Interessen:</label>
-        <textarea id="interests" value={interests} onChange={(e) => setInterests(e.target.value)} />
+        <label htmlFor='interests'>Interessen:</label>
+        <textarea id='interests' value={interests} onChange={(e) => setInterests(e.target.value)} />
 
-        <label htmlFor="address">Adresse:</label>
-        <textarea id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
+        <label htmlFor='address'>Adresse:</label>
+        <textarea id='address' value={address} onChange={(e) => setAddress(e.target.value)} />
 
         <button>Update Schweinchen</button>
-        {formError && <p className="error">{formError}</p>}
+        {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
   );

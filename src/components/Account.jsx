@@ -30,6 +30,12 @@ const Account = ({ session }) => {
   useEffect(() => {
     const fetchSchweinchen = async () => {
       const { data, error } = await supabase.from("profiles").select();
+      const { data: drawn_schweinchen_data, error: error_schweinchen } = await supabase
+        .from("drawn_schweinchen")
+        .select()
+        .single();
+
+      /* console.log(drawn_schweinchen_data); */
 
       if (error) {
         setFetchError("Keine Schweinchen gefunden");
