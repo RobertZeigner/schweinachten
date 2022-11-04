@@ -38,7 +38,6 @@ const Account = ({ session }) => {
       }
 
       if (data) {
-        console.log(data);
         setSchweinchen(data);
         setFetchError(null);
       }

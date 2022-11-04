@@ -17,7 +17,6 @@ const Schweinchen = () => {
       }
 
       if (data) {
-        console.log(data);
         setSchweinchen(data);
         setFetchError(null);
       }
@@ -29,9 +28,9 @@ const Schweinchen = () => {
     <div>
       {fetchError && <p>{fetchError}</p>}
       {schweinchen && (
-        <div className="schweinchen">
+        <div className='schweinchen'>
           {/* order-by buttons */}
-          <div className="schweinchen-grid">
+          <div className='schweinchen-grid'>
             {schweinchen.map((schwein) => (
               <SchweinchenCard key={schwein.id} schwein={schwein} />
             ))}

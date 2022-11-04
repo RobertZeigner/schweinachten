@@ -24,7 +24,6 @@ const Create = () => {
       setFormError("Etwas ist schiefgelaufen");
     }
     if (data) {
-      console.log(data);
       setFormError(null);
       navigate("/schweinchen");
     }
@@ -33,15 +32,15 @@ const Create = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+        <label htmlFor='name'>Name:</label>
+        <input type='text' id='name' value={name} onChange={(e) => setName(e.target.value)} />
 
-        <label htmlFor="interests">Interessen:</label>
-        <textarea id="interessen" value={interests} onChange={(e) => setInterests(e.target.value)} />
+        <label htmlFor='interests'>Interessen:</label>
+        <textarea id='interessen' value={interests} onChange={(e) => setInterests(e.target.value)} />
 
         <button>Schweinchen eintragen.</button>
 
-        {formError && <p className="error">{formError}</p>}
+        {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
   );
