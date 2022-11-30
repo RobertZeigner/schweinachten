@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import supabase from "../config/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import Profilecard from "./Profilecard";
 import { Stack, Typography } from "@mui/material";
 
 const Account = ({ session }) => {
@@ -114,7 +113,7 @@ const Account = ({ session }) => {
       {loading ? (
         "Loading ..."
       ) : (
-        <form onSubmit={updateProfile} className='form-widget'>
+        <form onSubmit={updateProfile}>
           <div>Email: {session.user.email}</div>
           <div>
             <label htmlFor='name'>Name</label>
@@ -141,7 +140,18 @@ const Account = ({ session }) => {
           </Stack>
         </form>
       )}
-      <Profilecard schweinchen={drawnSchweinchen} />
+      {drawnSchweinchen && (
+        <div
+          className='card'
+          style={{ width: "50%", margin: "0 auto", backgroundColor: "whitesmoke", padding: "20px" }}
+        >
+          <Stack>
+            <p>{drawnSchweinchen.name}</p>
+            <p>{drawnSchweinchen.interests}</p>
+            <p>{drawnSchweinchen.address}</p>
+          </Stack>
+        </div>
+      )}
     </div>
   );
 };

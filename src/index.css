@@ -21,6 +21,14 @@ form {
   border-radius: 6px;
 }
 
+.card {
+  background: #fff;
+  padding: 20px;
+  max-width: 900px;
+  margin: 50px auto;
+  border-radius: 6px;
+}
+
 form input,
 form textarea {
   display: block;
