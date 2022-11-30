@@ -14,14 +14,7 @@ const Account = ({ session }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [schweinchen, setSchweinchen] = useState(null);
-
-  /*   let schweinchen = {
-    name,
-    interests,
-    address,
-  }; */
-
-  /* console.log(session); */
+  const [drawnSchweinchen, setDrawnSchweinchen] = useState();
 
   useEffect(() => {
     getProfile();
@@ -30,17 +23,20 @@ const Account = ({ session }) => {
   useEffect(() => {
     const fetchSchweinchen = async () => {
       const { data, error } = await supabase.from("profiles").select();
+
+      //! Nutzen wenn alle Schweinchen gezogen wurden
       const { data: drawn_schweinchen_data, error: error_schweinchen } = await supabase
         .from("drawn_schweinchen")
         .select()
         .single();
 
-      /* console.log(drawn_schweinchen_data); */
+      setDrawnSchweinchen(drawn_schweinchen_data);
+      //console.log(drawnSchweinchen);
 
       if (error) {
         setFetchError("Keine Schweinchen gefunden");
         setSchweinchen(null);
-        console.log(error);
+        console.log(error.errorMessage);
       }
 
       if (data) {
@@ -145,6 +141,7 @@ const Account = ({ session }) => {
           </Stack>
         </form>
       )}
+      <Profilecard schweinchen={drawnSchweinchen} />
     </div>
   );
 };
